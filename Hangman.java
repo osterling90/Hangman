@@ -32,6 +32,35 @@ public class Hangman {
         gameLoop(arr);
     }
     public void gameLoop(letter[] arr){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\nLet's play Hangman!\n-------------------");
+        while(true){
+            System.out.println("\nDo you need to read the rules? (Y/N)");
+            String rules = sc.nextLine();
+            if(rules.equalsIgnoreCase("Y")){
+                System.out.println("\n No worries!\n\n Keep guessing letters in" +
+                " the word or guess the entire word itself!\n If you guess a" +
+                " letter correctly, it will appear. Guess incorrectly\n and" +
+                " some poor guy is one step closer to being strung up!" +
+                " Too many\n wrong guesses and our guy is not only dead but" +
+                " you lose! Guess all\n of the letters or the entire word before" +
+                " that happens and you win!\n\n Now, let's get started!\n----------------------------"
+                );
+                break;
+            }
+            else if(rules.equalsIgnoreCase("N")){
+                System.out.println("\nAwesome, let's do this!\n-----------------------");
+                break;
+            }
+            else{
+                System.out.println("\nThat answer is no good!");
+            }
+        }
+        while(true){
+            for(int i = 0; i < arr.length; i++){
+                
+            }
+        }
         
     }
     public static void main(String[] args) {
