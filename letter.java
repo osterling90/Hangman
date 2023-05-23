@@ -1,9 +1,22 @@
-package Hangman;
-public class letter {
-    boolean isCorrect;
-    char currentLetter;
+public class letter{
+    public boolean isCorrect;
+    public char character;
 
     public letter(){
-        isCorrect = false;
+        this.isCorrect = false;
+    }
+    public letter(boolean value){
+        this.isCorrect = value;
+    }
+    public char get(){
+        return this.character;
+    }
+    public void display(){
+        if(this.isCorrect == false){
+            System.out.print(" _ ");
+        }
+        else{
+            System.out.print(this.character);
+        }
     }
 }
