@@ -2,13 +2,16 @@ import java.io.*;
 import java.util.*;
 
 public class Hangman {
+    public void start(){
+        getWord();
+    }
     public void getWord(){
         String word = "";
         try{
             String nextString;
             ArrayList<String> list = new ArrayList<String>();
             BufferedReader buffer = 
-            new BufferedReader(new FileReader("wordList.txt"));
+            new BufferedReader(new FileReader("test.txt"));
             while((nextString = buffer.readLine()) != null){
                 list.add(nextString);
             }
@@ -32,7 +35,20 @@ public class Hangman {
         gameLoop(arr);
     }
     public void gameLoop(letter[] arr){
+        String[] man = new String[6];
+        man[0] = " O";
+        man[1] = " O\n |";
+        man[2] = " O\n/|";
+        man[3] = " O\n/|\\";
+        man[4] = " O\n/|\\" + "\n/";
+        man[5] = " O\n/|\\" + "\n/ \\";
         Scanner sc = new Scanner(System.in);
+        boolean playerWon;
+        char[] temp = new char[arr.length];
+        for(int i = 0; i < arr.length; i++){
+            temp[i] = arr[i].character;
+        }
+        String fullWord = String.copyValueOf(temp);
         System.out.println("\nLet's play Hangman!\n-------------------");
         while(true){
             System.out.println("\nDo you need to read the rules? (Y/N)");
@@ -49,28 +65,64 @@ public class Hangman {
                 break;
             }
             else if(rules.equalsIgnoreCase("N")){
-                System.out.println("\nAwesome, let's do this!\n-----------------------");
+                System.out.println("\nAwesome, let's do this!\n-----------------------\n");
                 break;
             }
             else{
                 System.out.println("\nThat answer is no good!");
             }
         }
-        while(true){
+        int a = 0;
+        while(a < 6){
             for(int i = 0; i < arr.length; i++){
-                
+                arr[i].display();
             }
+            System.out.println("\n\nGuess a letter or the word!");
+            String guess = sc.nextLine();
+            for(int i = 0; i < arr.length; i++){
+                if(guess.length() == 1 && guess.toUpperCase().charAt(0) == arr[i].character){
+                    arr[i].isCorrect = true;
+                    System.out.println("\nNice!\n");
+                }
+                /*if(guess.length() == 1 && guess.toUpperCase().charAt(0) != arr[i].character){
+                    System.out.println(man[a]);
+                }*/
+                if(guess.equalsIgnoreCase(fullWord)){
+                    System.out.println("\nYou guessed the word!\n");
+                    for(int j = 0; j < arr.length; j++){
+                        arr[j].isCorrect = true;
+                        arr[j].display();
+                        sc.close();
+                    }
+                    System.out.println("\n");
+                    playerWon = true;
+                    teardown(playerWon);
+                }
+                /*if(guess.equalsIgnoreCase(fullWord) != true){
+                    System.out.println(man[a]);
+                }*/
+                if(a == 5){
+                    System.out.println("\nOh no!\n\n" + " |\n |\n O\n/|\\" + "\n/ \\\n");
+                    teardown(false);
+                }
+            }
+            a++;
         }
-        
+    }
+    public void teardown(boolean playerWon){
+        if(playerWon == true){
+            System.out.println("Congrats, you won the game!" +
+            " Come play again sometime!\n\n------------------------\n");
+            System.exit(0);
+        }
+        if(playerWon == false){
+            System.out.println("Ouch, that's tough." +
+            " You did your best though! Come play again anytime!\n\n------------------------\n");
+            System.exit(0);
+        }
     }
     public static void main(String[] args) {
-        Hangman h = new Hangman();
-        h.getWord();
-        /* String first = " O";
-        String second = " O\n |";
-        String third =  " O\n/|";
-        String fourth = " O\n/|\\";
-        String fifth = " O\n/|\\" + "\n/";
-        String sixth = " O\n/|\\" + "\n/ \\"; */
+        Hangman game = new Hangman();
+        game.start();
     }
 }
