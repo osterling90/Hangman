@@ -1,8 +1,8 @@
-package Hangman;
 import java.io.*;
 import java.util.*;
+
 public class Hangman {
-    public static void getWord(){
+    public void getWord(){
         String word = "";
         try{
             String nextString;
@@ -22,19 +22,20 @@ public class Hangman {
             System.out.println("An error occured. Cannot read file.");
         }
     }
-    public static void buildWord(String word){
-        letter[] array = new letter[word.length()];
+    public void buildWord(String word){
+        letter[] arr = new letter[word.length()];
         for(int i = 0; i < word.length(); i++){
-            array[i].currentLetter = word.charAt(i);
+            arr[i] = new letter();
+            arr[i].display();
         }
+        gameLoop(arr);
     }
-    public void gameLoop(){
-
-    }
-    public void display(){
-
+    public void gameLoop(letter[] arr){
+        
     }
     public static void main(String[] args) {
+        Hangman h = new Hangman();
+        h.getWord();
         /* String first = " O";
         String second = " O\n |";
         String third =  " O\n/|";
