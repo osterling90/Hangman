@@ -26,7 +26,8 @@ public class Hangman {
         letter[] arr = new letter[word.length()];
         for(int i = 0; i < word.length(); i++){
             arr[i] = new letter();
-            arr[i].display();
+            arr[i].character = word.charAt(i);
+            //arr[i].display();
         }
         gameLoop(arr);
     }
