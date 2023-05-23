@@ -16,7 +16,7 @@ public class letter{
             System.out.print(" _ ");
         }
         else{
-            System.out.print(this.character);
+            System.out.print(" " + this.character + " ");
         }
     }
 }
